@@ -239,7 +239,7 @@ if not multichar then
                     end
                 end)
         else
-            deferrals.done(TranslateCap('no_identifier'))
+            deferrals.done(Locale['no_identifier'])
         end
     end)
 
@@ -324,27 +324,27 @@ ESX.RegisterServerCallback('bcs_identity:registerIdentity', function(source, cb,
                                 playerIdentity[xPlayer.identifier] = nil
                                 cb(true)
                             else
-                                xPlayer.showNotification(TranslateCap('invalid_height_format'), "error")
+                                xPlayer.showNotification(Locale['invalid_height_format'], "error")
                                 cb(false)
                             end
                         else
-                            xPlayer.showNotification(TranslateCap('invalid_dob_format'), "error")
+                            xPlayer.showNotification(Locale['invalid_dob_format'], "error")
                             cb(false)
                         end
                     else
-                        xPlayer.showNotification(TranslateCap('invalid_sex_format'), "error")
+                        xPlayer.showNotification(Locale['invalid_sex_format'], "error")
                         cb(false)
                     end
                 else
-                    xPlayer.showNotification(TranslateCap('invalid_lastname_format'), "error")
+                    xPlayer.showNotification(Locale['invalid_lastname_format'], "error")
                     cb(false)
                 end
             else
-                xPlayer.showNotification(TranslateCap('invalid_firstname_format'), "error")
+                xPlayer.showNotification(Locale['invalid_firstname_format'], "error")
                 cb(false)
             end
         else
-            xPlayer.showNotification(TranslateCap('already_registered'), "error")
+            xPlayer.showNotification(Locale['already_registered'], "error")
             cb(false)
         end
     else
@@ -372,27 +372,27 @@ ESX.RegisterServerCallback('bcs_identity:registerIdentity', function(source, cb,
                                 TriggerClientEvent('esx_identity:setPlayerData', source, Identity)
                                 cb(true)
                             else
-                                TriggerClientEvent("esx:showNotification", source, TranslateCap('invalid_height_format'), "error")
+                                TriggerClientEvent("esx:showNotification", source, Locale['invalid_height_format'], "error")
                                 cb(false)
                             end
                         else
-                            TriggerClientEvent("esx:showNotification", source, TranslateCap('invalid_dob_format'), "error")
+                            TriggerClientEvent("esx:showNotification", source, Locale['invalid_dob_format'], "error")
                             cb(false)
                         end
                     else
-                        TriggerClientEvent("esx:showNotification", source, TranslateCap('invalid_sex_format'), "error")
+                        TriggerClientEvent("esx:showNotification", source, Locale['invalid_sex_format'], "error")
                         cb(false)
                     end
                 else
-                    TriggerClientEvent("esx:showNotification", source, TranslateCap('invalid_lastname_format'), "error")
+                    TriggerClientEvent("esx:showNotification", source, Locale['invalid_lastname_format'], "error")
                     cb(false)
                 end
             else
-                TriggerClientEvent("esx:showNotification", source, TranslateCap('invalid_firstname_format'), "error")
+                TriggerClientEvent("esx:showNotification", source, Locale['invalid_firstname_format'], "error")
                 cb(false)
             end
         else
-            TriggerClientEvent("esx:showNotification", source, TranslateCap('data_incorrect'), "error")
+            TriggerClientEvent("esx:showNotification", source, Locale['data_incorrect'], "error")
             cb(false)
         end
     end
@@ -401,80 +401,80 @@ end)
 if Config.EnableCommands then
 	ESX.RegisterCommand('char', 'user', function(xPlayer, args, showError)
         if xPlayer and xPlayer.getName() then
-            xPlayer.showNotification(TranslateCap('active_character', xPlayer.getName()))
+            xPlayer.showNotification(string.format(Locale['active_character'], xPlayer.getName()))
         else
-            xPlayer.showNotification(TranslateCap('error_active_character'))
+            xPlayer.showNotification(Locale['error_active_character'])
         end
-    end, false, {help = TranslateCap('show_active_character')})
+    end, false, {help = Locale['show_active_character']})
 
 	ESX.RegisterCommand('chardel', 'user', function(xPlayer, args, showError)
         if xPlayer and xPlayer.getName() then
             if Config.UseDeferrals then
-                xPlayer.kick(TranslateCap('deleted_identity'))
+                xPlayer.kick(Locale['deleted_identity'])
                 Wait(1500)
                 deleteIdentity(xPlayer)
-                xPlayer.showNotification(TranslateCap('deleted_character'))
+                xPlayer.showNotification(Locale['deleted_character'])
                 playerIdentity[xPlayer.identifier] = nil
                 alreadyRegistered[xPlayer.identifier] = false
             else
                 deleteIdentity(xPlayer)
-                xPlayer.showNotification(TranslateCap('deleted_character'))
+                xPlayer.showNotification(Locale['deleted_character'])
                 playerIdentity[xPlayer.identifier] = nil
                 alreadyRegistered[xPlayer.identifier] = false
                 TriggerClientEvent('bcs_identity:startRegister', xPlayer.source)
             end
         else
-            xPlayer.showNotification(TranslateCap('error_delete_character'))
+            xPlayer.showNotification(Locale['error_delete_character'])
         end
-    end, false, {help = TranslateCap('delete_character')})
+    end, false, {help = Locale['delete_character']})
 end
 
 if Config.EnableDebugging then
     ESX.RegisterCommand('xPlayerGetFirstName', 'user', function(xPlayer, args, showError)
         if xPlayer and xPlayer.get('firstName') then
-            xPlayer.showNotification(TranslateCap('return_debug_xPlayer_get_first_name', xPlayer.get('firstName')))
+            xPlayer.showNotification(string.format(Locale['return_debug_xPlayer_get_first_name'], xPlayer.get('firstName')))
         else
-            xPlayer.showNotification(TranslateCap('error_debug_xPlayer_get_first_name'))
+            xPlayer.showNotification(Locale['error_debug_xPlayer_get_first_name'])
         end
-    end, false, {help = TranslateCap('debug_xPlayer_get_first_name')})
+    end, false, {help = Locale['debug_xPlayer_get_first_name']})
 
     ESX.RegisterCommand('xPlayerGetLastName', 'user', function(xPlayer, args, showError)
         if xPlayer and xPlayer.get('lastName') then
-            xPlayer.showNotification(TranslateCap('return_debug_xPlayer_get_last_name', xPlayer.get('lastName')))
+            xPlayer.showNotification(string.format(Locale['return_debug_xPlayer_get_last_name'], xPlayer.get('lastName')))
         else
-            xPlayer.showNotification(TranslateCap('error_debug_xPlayer_get_last_name'))
+            xPlayer.showNotification(Locale['error_debug_xPlayer_get_last_name'])
         end
-    end, false, {help = TranslateCap('debug_xPlayer_get_last_name')})
+    end, false, {help = Locale['debug_xPlayer_get_last_name']})
 
     ESX.RegisterCommand('xPlayerGetFullName', 'user', function(xPlayer, args, showError)
         if xPlayer and xPlayer.getName() then
-            xPlayer.showNotification(TranslateCap('return_debug_xPlayer_get_full_name', xPlayer.getName()))
+            xPlayer.showNotification(string.format(Locale['return_debug_xPlayer_get_full_name'], xPlayer.getName()))
         else
-            xPlayer.showNotification(TranslateCap('error_debug_xPlayer_get_full_name'))
+            xPlayer.showNotification(Locale['error_debug_xPlayer_get_full_name'])
         end
-    end, false, {help = TranslateCap('debug_xPlayer_get_full_name')})
+    end, false, {help = Locale['debug_xPlayer_get_full_name']})
 
     ESX.RegisterCommand('xPlayerGetSex', 'user', function(xPlayer, args, showError)
         if xPlayer and xPlayer.get('sex') then
-            xPlayer.showNotification(TranslateCap('return_debug_xPlayer_get_sex', xPlayer.get('sex')))
+            xPlayer.showNotification(string.format(Locale['return_debug_xPlayer_get_sex'], xPlayer.get('sex')))
         else
-            xPlayer.showNotification(TranslateCap('error_debug_xPlayer_get_sex'))
+            xPlayer.showNotification(Locale['error_debug_xPlayer_get_sex'])
         end
-    end, false, {help = TranslateCap('debug_xPlayer_get_sex')})
+    end, false, {help = Locale['debug_xPlayer_get_sex']})
 
     ESX.RegisterCommand('xPlayerGetDOB', 'user', function(xPlayer, args, showError)
         if xPlayer and xPlayer.get('dateofbirth') then
-            xPlayer.showNotification(TranslateCap('return_debug_xPlayer_get_dob', xPlayer.get('dateofbirth')))
+            xPlayer.showNotification(string.format(Locale['return_debug_xPlayer_get_dob'], xPlayer.get('dateofbirth')))
         else
-            xPlayer.showNotification(TranslateCap('error_debug_xPlayer_get_dob'))
+            xPlayer.showNotification(Locale['error_debug_xPlayer_get_dob'])
         end
-    end, false, {help = TranslateCap('debug_xPlayer_get_dob')})
+    end, false, {help = Locale['debug_xPlayer_get_dob']})
 
     ESX.RegisterCommand('xPlayerGetHeight', 'user', function(xPlayer, args, showError)
         if xPlayer and xPlayer.get('height') then
-            xPlayer.showNotification(TranslateCap('return_debug_xPlayer_get_height', xPlayer.get('height')))
+            xPlayer.showNotification(string.format(Locale['return_debug_xPlayer_get_height'], xPlayer.get('height')))
         else
-            xPlayer.showNotification(TranslateCap('error_debug_xPlayer_get_height'))
+            xPlayer.showNotification(Locale['error_debug_xPlayer_get_height'])
         end
-    end, false, {help = TranslateCap('debug_xPlayer_get_height')})
+    end, false, {help = Locale['debug_xPlayer_get_height']})
 end

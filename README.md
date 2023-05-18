@@ -10,6 +10,10 @@ An edit to esx_identity UI using React.JS
 4. Configure config.lua to your liking
 5. Start the script in your server.cfg
 
+## Dependencies
+
+1. [oxmysql](https://github.com/overextended/oxmysql/releases/tag/v2.6.0)
+
 ## [Preview](https://youtu.be/bIQR11j-OAw)
 
 ## Credits

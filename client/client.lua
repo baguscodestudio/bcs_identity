@@ -39,7 +39,7 @@ RegisterNUICallback('register', function(data, cb)
       while not IsScreenFadedOut() do
         Wait(100)
       end
-      SetEntityCoords(PlayerPedId(), tempCoords)
+      SetEntityCoords(PlayerPedId(), tempCoords.x, tempCoords.y, tempCoord.z - 1)
       FreezeEntityPosition(PlayerPedId(), true)
       while not HasCollisionLoadedAroundEntity(PlayerPedId()) do
         Wait(200)

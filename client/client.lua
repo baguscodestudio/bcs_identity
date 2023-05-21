@@ -20,7 +20,7 @@ end)
 
 RegisterNetEvent('bcs_identity:startRegister', function()
     TriggerEvent('esx_skin:resetFirstSpawn')
-    while not spawned do
+    while not spawned and not ESX.GetConfig().Multichar do
       Wait(500)
     end
     tempCoords = GetEntityCoords(PlayerPedId())
@@ -39,7 +39,9 @@ RegisterNUICallback('register', function(data, cb)
       while not IsScreenFadedOut() do
         Wait(100)
       end
-      SetEntityCoords(PlayerPedId(), tempCoords.x, tempCoords.y, tempCoord.z - 1)
+      if not ESX.GetConfig().Multichar then
+        SetEntityCoords(PlayerPedId(), tempCoords.x, tempCoords.y, tempCoord.z - 1)
+      end
       FreezeEntityPosition(PlayerPedId(), true)
       while not HasCollisionLoadedAroundEntity(PlayerPedId()) do
         Wait(200)

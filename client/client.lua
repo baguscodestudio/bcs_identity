@@ -1,14 +1,17 @@
-local function toggleNuiFrame(shouldShow)
-	SetNuiFocus(shouldShow, shouldShow)
-	SendReactMessage("setVisible", shouldShow)
-end
-
 local spawnCoord = vec4(-2149.7471, 226.6672, 184.6017, 204.4179)
 local coordFace = vec4(-2149.0474, 223.7749, 184.6017, 64.3709)
 local goAway = vec4(-2150.8723, 221.8923, 184.6017, 126.3077)
 local facing = vec3(-2150.75, 225.44, 185.16)
-local cam, tempCoords
-local spawned = false
+local cam
+local spawned, ready = false, false
+
+local function toggleNuiFrame(shouldShow)
+	while not ready do
+		Wait(250)
+	end
+	SetNuiFocus(shouldShow, shouldShow)
+	SendReactMessage("setVisible", shouldShow)
+end
 
 RegisterNetEvent("esx_identity:alreadyRegistered", function()
 	TriggerEvent("esx_skin:playerRegistered")
@@ -23,12 +26,16 @@ RegisterNetEvent("bcs_identity:startRegister", function()
 	while not spawned and not ESX.GetConfig().Multichar do
 		Wait(500)
 	end
-	tempCoords = GetEntityCoords(PlayerPedId())
 	SetEntityCoords(PlayerPedId(), facing)
 
 	if not ESX.PlayerData.dead then
 		StartRegistry()
 	end
+end)
+
+RegisterNUICallback("initialize", function(data, cb)
+	ready = true
+	cb(UIConfig)
 end)
 
 RegisterNUICallback("register", function(data, cb)
@@ -42,14 +49,15 @@ RegisterNUICallback("register", function(data, cb)
 				Wait(100)
 			end
 			if not ESX.GetConfig().Multichar then
-				SetEntityCoords(PlayerPedId(), tempCoords.x, tempCoords.y, tempCoords.z - 1)
+				local spawn = ESX.GetConfig().DefaultSpawn or { x = -269.4, y = -955.3, z = 31.2, heading = 205.8 }
+				SetEntityCoords(PlayerPedId(), spawn.x, spawn.y, spawn.z - 1)
+				SetEntityHeading(PlayerPedId(), spawn.heading)
 			end
 			FreezeEntityPosition(PlayerPedId(), true)
 			while not HasCollisionLoadedAroundEntity(PlayerPedId()) do
 				Wait(200)
 			end
 			FreezeEntityPosition(PlayerPedId(), false)
-			tempCoords = nil
 			DoScreenFadeIn(500)
 			TriggerEvent("esx_skin:openSaveableMenu")
 

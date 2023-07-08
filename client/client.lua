@@ -13,6 +13,17 @@ local function toggleNuiFrame(shouldShow)
 	SendReactMessage("setVisible", shouldShow)
 end
 
+RegisterNetEvent('esx_identity:setPlayerData', function(data)
+	SetTimeout(1, function()
+		ESX.SetPlayerData("name", ('%s %s'):format(data.firstName, data.lastName))
+		ESX.SetPlayerData('firstName', data.firstName)
+		ESX.SetPlayerData('lastName', data.lastName)
+		ESX.SetPlayerData('dateofbirth', data.dateOfBirth)
+		ESX.SetPlayerData('sex', data.sex)
+		ESX.SetPlayerData('height', data.height)
+	end)
+end)
+
 RegisterNetEvent("esx_identity:alreadyRegistered", function()
 	TriggerEvent("esx_skin:playerRegistered")
 end)
@@ -59,9 +70,9 @@ RegisterNUICallback("register", function(data, cb)
 			end
 			FreezeEntityPosition(PlayerPedId(), false)
 			DoScreenFadeIn(500)
-			TriggerEvent("esx_skin:openSaveableMenu")
 
 			if not ESX.GetConfig().Multichar then
+				TriggerEvent("esx_skin:openSaveableMenu")
 				TriggerEvent("esx_skin:playerRegistered")
 			end
 		end

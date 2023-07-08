@@ -10,6 +10,10 @@ An edit to esx_identity UI using React.JS
 4. Configure config.lua to your liking
 5. Start the script in your server.cfg
 
+## esx_multicharacter installation
+
+In `esx_multicharacter/client/main.lua` replace this `'esx_identity:showRegisterIdentity'` with `'bcs_identity:startRegister'`
+
 ## Dependencies
 
 1. [oxmysql](https://github.com/overextended/oxmysql/releases/tag/v2.6.0)

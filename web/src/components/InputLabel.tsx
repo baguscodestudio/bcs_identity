@@ -11,7 +11,9 @@ const InputLabel: React.FC<{
 	type?: string;
 	label: string;
 	name: string;
-}> = ({ className, label, name, pattern, type, onChange, value }) => {
+	min?: number;
+	max?: number;
+}> = ({ className, label, name, pattern, min, max, type, onChange, value }) => {
 	const { color } = useColor();
 
 	return (
@@ -29,6 +31,8 @@ const InputLabel: React.FC<{
 				pattern={pattern}
 				value={value}
 				name={name}
+				min={min}
+				max={max}
 				onChange={onChange}
 				required
 				className="peer invalid:outline-red-400 invalid:outline-2 w-full h-full text-gray-300 bg-transparent outline-none px-8 py-2 text-xl focus:outline-neutral-200 rounded-sm"

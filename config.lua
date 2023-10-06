@@ -12,13 +12,13 @@ Config.UseDeferrals = false
 Config.DateFormat = "DD/MM/YYYY"
 
 -- These values are for the second input validation in server/main.lua
-Config.MaxNameLength = 20 -- Max Name Length.
-Config.MinHeight = 120 -- 120 cm lowest height
-Config.MaxHeight = 220 -- 220 cm max height.
-Config.LowestYear = 1900 -- 112 years old is the oldest you can be.
-Config.HighestYear = 2003 -- 18 years old is the youngest you can be.
+Config.MaxNameLength = 20                            -- Max Name Length.
+Config.MinHeight = 120                               -- 120 cm lowest height
+Config.MaxHeight = 220                               -- 220 cm max height.
+Config.LowestYear = 1900                             -- 112 years old is the oldest you can be.
+Config.HighestYear = 2003                            -- 18 years old is the youngest you can be.
 
-Config.FullCharDelete = true -- Delete all reference to character.
+Config.FullCharDelete = true                         -- Delete all reference to character.
 Config.EnableDebugging = ESX.GetConfig().EnableDebug -- prints for debugging :)
 
 UIConfig = {
@@ -27,6 +27,8 @@ UIConfig = {
 	-- red, orange, amber, yellow, lime, green, emerald, teal, cyan, blue
 	-- sky, indigo, violet, purple, fushcia, pink, rose
 	color = "red",
+	minimum_height = 100,
+	maximum_height = 250,
 	locale = {
 		["registration"] = "REGISTRATION",
 		["welcome"] = "Welcome to Your servername! Please create your identity before continuing.",

@@ -134,6 +134,8 @@ const App: React.FC = () => {
 					label={locale['height']}
 					name="height"
 					type="number"
+					min={parseInt(config.minimum_height)}
+					max={parseInt(config.maximum_height)}
 					onChange={(e) =>
 						setInformation({
 							...information,

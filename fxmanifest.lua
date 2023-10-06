@@ -2,7 +2,7 @@ fx_version "cerulean"
 
 author 'baguscodestudio & esx legacy'
 description 'Identity with BCS UI'
-version      '1.1.2'
+version      '1.2.0'
 
 lua54 'yes'
 

@@ -103,7 +103,6 @@ const App: React.FC = () => {
 					className="my-8"
 					label={locale['firstname']}
 					name="firstname"
-					pattern="\w+"
 				/>
 				<InputLabel
 					className="my-8"
